@@ -19,6 +19,9 @@ Date: 2026-09-23
 - Added a shared Material Symbols Rounded icon system and replaced Home module text glyphs with consistent accessible icons.
 - Updated the Home announcement viewer to move focus into the modal and restore focus when it closes.
 - Added a compact mobile breakpoint for Home module cards so labels and controls remain readable on narrow screens.
+- Removed the need for long scrolling to reach updates by adding Home shortcuts for My Profile, Announcements, and Class Information.
+- Added a modal updates hub that lists every published announcement or class-information item and opens the selected item in the existing reader.
+- Bumped the root shell cache to `bsis-1a-shell-v11` for the latest Home layout.
 
 ## Verified Locally
 

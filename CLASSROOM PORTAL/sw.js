@@ -1,4 +1,4 @@
-const CACHE_NAME = "bsis-1a-shell-v10";
+const CACHE_NAME = "bsis-1a-shell-v11";
 const STATIC_ASSETS = [
   "./",
   "./index.html",
