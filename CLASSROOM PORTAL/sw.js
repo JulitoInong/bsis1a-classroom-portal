@@ -1,4 +1,4 @@
-const CACHE_NAME = "bsis-1a-shell-v6";
+const CACHE_NAME = "bsis-1a-shell-v8";
 const STATIC_ASSETS = [
   "./",
   "./index.html",
@@ -26,6 +26,7 @@ const STATIC_ASSETS = [
   "./shared/auth.js",
   "./shared/admin-recognition.js",
   "./shared/portal-polish.css",
+  "./shared/portal-redesign.css",
   "./shared/student-data.js",
   "./attendance/attendance-supabase.js",
   "./attendance/attendance-history.js",
