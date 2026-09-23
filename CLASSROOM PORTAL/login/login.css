@@ -1,0 +1,24 @@
+
+/* Login portal layout overrides */
+.portal-main{max-width:1080px;margin:0 auto;padding:88px 28px 48px}
+.portal-hero{max-width:820px;margin-bottom:28px}
+.portal-hero h2{font-size:clamp(38px,5vw,64px);line-height:1.02;margin:16px 0 12px}
+.portal-hero p{font-size:18px;line-height:1.55;margin:0;color:#65738b}
+.auth-card{max-width:820px;padding:30px 32px}
+.auth-card .card-top{display:flex;justify-content:space-between;gap:20px;align-items:flex-start;margin-bottom:24px}
+.auth-card .card-top h3{margin:0 0 5px;font-size:20px}
+.auth-card .card-top p{margin:0;color:#71809a}
+.auth-card .step{font-weight:800;color:#667085;background:#f1f3f7;border-radius:10px;padding:9px 10px}
+.login-brand{display:flex;align-items:center;gap:14px;margin:6px 0 18px}
+.login-brand>div:last-child{display:flex;flex-direction:column;gap:3px}
+.login-brand span{color:#71809a;font-size:14px}
+.google-auth-icon,.google-btn-icon{font-weight:800;color:#4285f4}
+.google-auth-icon{width:42px;height:42px;border:1px solid #e2e7ef;border-radius:12px;display:grid;place-items:center;font-size:21px;background:#fff}
+.google-btn{width:100%;min-height:54px;border:1px solid #d9e0ea;background:#fff;border-radius:12px;display:flex;align-items:center;justify-content:center;gap:10px;font-weight:800;cursor:pointer}
+.google-btn:hover{border-color:#b9c4d4;box-shadow:0 5px 18px rgba(16,24,40,.06)}
+.google-btn:disabled{opacity:.65;cursor:wait}
+.google-spinner{display:none;width:15px;height:15px;border:2px solid #d7dce5;border-top-color:#4285f4;border-radius:50%;animation:spin .8s linear infinite}
+.google-btn.loading .google-spinner{display:inline-block}
+.auth-note{margin:16px 0 0;color:#71809a;font-size:14px}
+.message{min-height:0}
+@keyframes spin{to{transform:rotate(360deg)}}

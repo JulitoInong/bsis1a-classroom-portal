@@ -1,0 +1,25 @@
+BSIS 1-A CLASS OFFICERS SETUP
+
+1. Run class-officers-migration.sql once in Supabase SQL Editor.
+2. The migration creates public.class_officers with an RLS policy.
+3. It attempts to seed the supplied officers by matching their names against
+   existing public.students.full_name:
+      President - Julito Inong
+      Vice President - Renz Galo
+      Secretary - Mica Moranos
+      Treasurer - Rj Miles Labajo
+      Auditor - Laureen Mae Ibarra
+      PIO - Maica Octavio
+      BUSS M - Client Gomez
+
+If a name does not yet exist in students, that officer is skipped by the seed.
+You can add/link that officer later from Admin Dashboard > Class Officers.
+
+4. Students can read the class officer list.
+5. Only authorized admins can add, edit, or remove officers.
+6. Student Home displays officer PFPs from the linked student record.
+7. Student Profile shows an Administrator badge only when the current
+   Supabase auth user exists in public.admin_users.
+
+The admin recognition is based on Supabase auth_user_id, not on a name/email
+hardcoded into the frontend.

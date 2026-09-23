@@ -1,0 +1,24 @@
+BSIS 1-A PWA SETUP
+==================
+
+This build includes:
+- manifest.webmanifest
+- sw.js
+- shared/pwa.js
+- 192px and 512px BSIS app icons
+- install-app controls where supported
+
+Deployment requirements:
+1. Serve the site from HTTPS in production. localhost is suitable for development.
+2. Keep manifest.webmanifest and sw.js at the project root.
+3. The app starts at home/index.html; unauthenticated users are redirected to the Google Login Portal.
+4. Supabase/Google authentication remains online-first. The service worker does not cache private Supabase data.
+5. Browser install UI varies by Chrome/Edge/Safari/Android/iOS and may not expose the custom install button on every browser.
+
+Static validation in this package:
+- JavaScript syntax checked with Node.js.
+- Duplicate HTML IDs checked.
+- Local HTML/CSS/JS/image references checked.
+- PWA static asset references checked.
+
+Live verification still requires the deployed Supabase/Google environment and real browser sessions.

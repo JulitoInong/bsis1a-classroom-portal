@@ -1,0 +1,14 @@
+BSIS 1-A — FINAL ACCOUNT SWITCH VERIFICATION PLAN
+
+Static automated checks in this package validate the production-safe account-switch implementation.
+Manual live verification remains required for the real Google account chooser and Supabase session.
+
+Manual sequence:
+1. Sign in with Google account A.
+2. Reach Registrar.
+3. Click Use a different Google account.
+4. Confirm login page remains visible and does not auto-redirect.
+5. Click Sign in with Google.
+6. Confirm Google displays the account chooser.
+7. Choose account B.
+8. Confirm Registrar identifies account B.

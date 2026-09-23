@@ -1,0 +1,10 @@
+ADMIN STUDENT PROFILE PHOTOS
+============================
+
+The admin dashboard now reads students.avatar_url and displays each student's
+current profile photo in the class list.
+
+This assumes the existing student-avatars bucket is accessible through the
+avatar_url values already stored by the working profile upload flow.
+
+No new bucket or service-role key is required for this UI change.

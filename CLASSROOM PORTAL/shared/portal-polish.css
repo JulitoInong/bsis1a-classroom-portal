@@ -1,0 +1,35 @@
+/* Shared authenticated portal visual language. */
+:where(.schedule-page,.directory-page,.profile-page){
+  color:#172033;
+  background:#f4f7fb!important;
+}
+:where(.schedule-page,.directory-page,.profile-page) .portal-header{
+  background:#101827!important;
+  border-bottom:1px solid rgba(255,255,255,.12);
+  box-shadow:0 8px 24px rgba(15,23,42,.15);
+}
+:where(.schedule-page,.directory-page,.profile-page) .portal-header-inner{
+  width:min(1240px,calc(100% - 48px));
+  min-height:78px;
+}
+:where(.schedule-page,.directory-page,.profile-page) .portal-brand-logo{
+  box-shadow:0 0 0 4px rgba(255,255,255,.06);
+}
+:where(.schedule-page,.directory-page,.profile-page) .school-year-pill{
+  border-color:rgba(255,255,255,.18);
+  background:rgba(255,255,255,.04);
+}
+:where(.schedule-page,.directory-page,.profile-page) .student-menu-btn{
+  border-radius:10px;
+  box-shadow:0 7px 18px rgba(15,23,42,.16);
+}
+:where(.schedule-page,.directory-page,.profile-page) .page-hero,
+:where(.schedule-page,.directory-page,.profile-page) .profile-hero,
+:where(.schedule-page,.directory-page,.profile-page) .schedule-hero{
+  animation:portal-rise .45s ease both;
+}
+@keyframes portal-rise{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+@media(max-width:760px){
+  :where(.schedule-page,.directory-page,.profile-page) .portal-header-inner{width:calc(100% - 28px);min-height:68px}
+}
+@media(prefers-reduced-motion:reduce){:where(.schedule-page,.directory-page,.profile-page) .page-hero,:where(.schedule-page,.directory-page,.profile-page) .profile-hero,:where(.schedule-page,.directory-page,.profile-page) .schedule-hero{animation:none}}

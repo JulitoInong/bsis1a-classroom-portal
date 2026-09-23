@@ -1,0 +1,12 @@
+BSIS 1-A ADMIN RECOGNITION
+
+The student-facing Admin Portal button and Administrator badges are shown only
+when the currently authenticated Supabase user has a row in public.admin_users
+with auth_user_id equal to auth.uid().
+
+This is UI recognition. The actual Admin Dashboard remains protected by
+admin/admin-guard.js and the database RLS policies.
+
+The admin identity displayed in the dashboard is resolved from the authenticated
+session and the matching students row when available. No admin Gmail/name/UID is
+hardcoded into the frontend.
