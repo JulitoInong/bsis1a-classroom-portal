@@ -9,6 +9,8 @@ function setScheduleNav(open){
   scheduleMenuBtn?.setAttribute("aria-label",open?"Close schedule navigation":"Open schedule navigation");
   scheduleNav?.setAttribute("aria-hidden",String(!open));
   scheduleNavBackdrop?.setAttribute("aria-hidden",String(!open));
+  if(scheduleNav) scheduleNav.inert=!open;
+  if(scheduleNavBackdrop) scheduleNavBackdrop.inert=!open;
 }
 scheduleMenuBtn?.addEventListener("click",()=>setScheduleNav(!document.body.classList.contains("schedule-nav-open")));
 scheduleNavBackdrop?.addEventListener("click",()=>setScheduleNav(false));

@@ -1,9 +1,9 @@
-(async function enforceAdminAccess() {
+window.adminAccessReady = (async function enforceAdminAccess() {
   const { data: { session } } = await supabaseClient.auth.getSession();
 
   if (!session) {
-    window.location.replace(`${window.location.origin}/login/index.html`);
-    return;
+    window.location.replace(new URL("../login/index.html", window.location.href).href);
+    return false;
   }
 
   const { data, error } = await supabaseClient
@@ -14,6 +14,8 @@
 
   if (error || !data) {
     await supabaseClient.auth.signOut();
-    window.location.replace(`${window.location.origin}/login/index.html`);
+    window.location.replace(new URL("../login/index.html", window.location.href).href);
+    return false;
   }
+  return true;
 })();

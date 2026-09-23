@@ -78,3 +78,5 @@ Important:
 - Grades now syncs semester records and target GWA to the linked student account.
 - Existing local records are retained as a fallback and seeded when remote data is empty.
 - Bumped the root PWA shell cache to v4.
+
+Full UI redesign layer added: glassmorphism, 3D interactions, theme toggle, scroll progress, responsive polish, and schedule-aware room map.

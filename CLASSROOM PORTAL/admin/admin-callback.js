@@ -5,7 +5,7 @@ async function verifyAdmin() {
   const { data: { session } } = await supabaseClient.auth.getSession();
 
   if (!session) {
-    window.location.replace(`${window.location.origin}/login/index.html`);
+    window.location.replace(new URL("../login/index.html", window.location.href).href);
     return;
   }
 
@@ -25,11 +25,11 @@ async function verifyAdmin() {
 
   if (!data) {
     await supabaseClient.auth.signOut();
-    window.location.replace(`${window.location.origin}/login/index.html`);
+    window.location.replace(new URL("../login/index.html", window.location.href).href);
     return;
   }
 
-  window.location.replace(`${window.location.origin}/admin/admin.html`);
+  window.location.replace(new URL("./admin.html", window.location.href).href);
 }
 
 verifyAdmin();

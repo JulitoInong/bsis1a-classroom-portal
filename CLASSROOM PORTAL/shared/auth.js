@@ -1,7 +1,6 @@
 // Shared auth helpers for the separate student portals.
-const APP_ORIGIN = window.location.origin;
-const LOGIN_PAGE = `${APP_ORIGIN}/login/index.html`;
-const REGISTRAR_PAGE = `${APP_ORIGIN}/registrar/index.html`;
+const LOGIN_PAGE = new URL("../login/index.html", window.location.href).href;
+const REGISTRAR_PAGE = new URL("../registrar/index.html", window.location.href).href;
 const FORCE_GOOGLE_ACCOUNT_SWITCH_KEY = "bsis_force_google_account_switch";
 
 function redirectToLogin(){window.location.replace(LOGIN_PAGE);}

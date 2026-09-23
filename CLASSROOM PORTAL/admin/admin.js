@@ -664,6 +664,7 @@ function updateAdminSection(tabName){
 }
 
 (async()=>{
+  if(window.adminAccessReady && !(await window.adminAccessReady)) return;
   const adminInfo = await BSISAdmin.apply();
   if(adminInfo?.isAdmin){
     const name = adminInfo.name || 'Administrator';
