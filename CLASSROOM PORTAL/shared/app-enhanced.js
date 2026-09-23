@@ -1,15 +1,8 @@
 (function(){
-  const root=document.body;
-  if(!root)return;
-  const bar=document.createElement('div');bar.className='ui-progress';document.body.appendChild(bar);
-  const saved=localStorage.getItem('bsis-ui-theme');if(saved==='dark')root.classList.add('ui-dark');
-  const headerActions=document.querySelector('.portal-header-actions');
-  if(headerActions&&!document.querySelector('.ui-theme-toggle')){
-    const b=document.createElement('button');b.className='ui-theme-toggle';b.type='button';b.title='Toggle appearance';b.setAttribute('aria-label','Toggle appearance');b.textContent=root.classList.contains('ui-dark')?'☀':'☾';
-    b.addEventListener('click',()=>{root.classList.toggle('ui-dark');localStorage.setItem('bsis-ui-theme',root.classList.contains('ui-dark')?'dark':'light');b.textContent=root.classList.contains('ui-dark')?'☀':'☾'});headerActions.prepend(b);
-  }
-  addTilt();
-  document.addEventListener('click',e=>{const el=e.target.closest('button,.module-card,.content-view-btn');if(!el)return;el.animate([{transform:'scale(.985)'},{transform:''}],{duration:160,easing:'ease-out'})},{passive:true});
-  const update=()=>{const h=document.documentElement.scrollHeight-innerHeight;bar.style.width=(h>0?(scrollY/h)*100:0)+'%'};addEventListener('scroll',update,{passive:true});update();
-  function addTilt(){if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;document.querySelectorAll('.module-card,.student-overview,.content-card,.today-card,.online-day-card,.officer-card').forEach(card=>{card.addEventListener('pointermove',e=>{const r=card.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;card.style.transform=`perspective(900px) rotateX(${(-y*3).toFixed(2)}deg) rotateY(${(x*4).toFixed(2)}deg) translateY(-4px)`});card.addEventListener('pointerleave',()=>card.style.transform='')})}
-})();
+const root=document.body;if(!root)return;const KEY='bsis-ui-theme';const saved=localStorage.getItem(KEY);const systemDark=matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches;
+const applyTheme=(theme,save=true)=>{root.classList.toggle('ui-dark',theme==='dark');root.classList.toggle('ui-light',theme==='light');root.dataset.theme=theme;document.documentElement.dataset.theme=theme;const meta=document.querySelector('meta[name="theme-color"]');if(meta)meta.content=theme==='dark'?'#070b14':'#f4f7fb';document.querySelectorAll('.ui-theme-toggle').forEach(b=>{b.textContent=theme==='dark'?'☀':'☾';b.setAttribute('aria-label',theme==='dark'?'Switch to light mode':'Switch to dark mode');b.title=theme==='dark'?'Light mode':'Dark mode'});if(save)localStorage.setItem(KEY,theme)};
+const initial=saved==='dark'||(saved!=='light'&&systemDark)?'dark':'light';applyTheme(initial,false);
+const mount=()=>{let ha=document.querySelector('.portal-header-actions'),b=document.querySelector('.ui-theme-toggle');if(!b){b=document.createElement('button');b.className='ui-theme-toggle';b.type='button';if(ha)ha.prepend(b);else{b.classList.add('ui-theme-floating');document.body.appendChild(b)}}b.addEventListener('click',()=>applyTheme(root.classList.contains('ui-dark')?'light':'dark'));applyTheme(root.classList.contains('ui-dark')?'dark':'light',false)};if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',mount,{once:true});else mount();
+if(matchMedia){const mq=matchMedia('(prefers-color-scheme: dark)');mq.addEventListener?.('change',e=>{if(!localStorage.getItem(KEY))applyTheme(e.matches?'dark':'light',false)})}
+const bar=document.createElement('div');bar.className='ui-progress';document.body.appendChild(bar);const update=()=>{const h=document.documentElement.scrollHeight-innerHeight;bar.style.width=(h>0?(scrollY/h)*100:0)+'%'};addEventListener('scroll',update,{passive:true});update();
+function addTilt(){if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;document.querySelectorAll('.module-card,.student-overview,.content-card,.today-card,.online-day-card,.officer-card,.premium-stat').forEach(card=>{card.addEventListener('pointermove',e=>{const r=card.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;card.style.transform=`perspective(900px) rotateX(${(-y*2.5).toFixed(2)}deg) rotateY(${(x*3).toFixed(2)}deg) translateY(-3px)`});card.addEventListener('pointerleave',()=>card.style.transform='')})}setTimeout(addTilt,0);})();
