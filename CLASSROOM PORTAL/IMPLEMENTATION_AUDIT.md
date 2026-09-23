@@ -16,6 +16,9 @@ Date: 2026-09-23
 - Added an accessible label to Admin student search and hid decorative search glyphs from assistive technology.
 - Added a shared `.sr-only` utility.
 - Added `inert` handling to the closed Home, Profile, and Schedule navigation drawers so hidden links cannot receive keyboard focus.
+- Added a shared Material Symbols Rounded icon system and replaced Home module text glyphs with consistent accessible icons.
+- Updated the Home announcement viewer to move focus into the modal and restore focus when it closes.
+- Added a compact mobile breakpoint for Home module cards so labels and controls remain readable on narrow screens.
 
 ## Verified Locally
 
