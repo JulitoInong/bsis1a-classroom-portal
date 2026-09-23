@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../style.css"><link rel="stylesheet" href="home.css"><link rel="stylesheet" href="../shared/portal-redesign.css">
 <link rel="manifest" href="../manifest.webmanifest"><link rel="apple-touch-icon" href="../assets/bsis-1a-icon-192.png">
-<link rel="stylesheet" href="../shared/app-enhanced.css"></head>
+</head>
 <body class="home-page">
 <header class="portal-header">
   <div class="portal-header-inner">
@@ -57,40 +57,13 @@
     
   </section>
 
-  <section class="premium-dashboard" aria-label="Academic overview">
-<div class="premium-stat"><span class="stat-label">Attendance</span><strong id="premiumAttendance" class="stat-value">—</strong><small id="premiumAttendanceMeta" class="stat-meta">Loading attendance</small></div>
-<div class="premium-stat"><span class="stat-label">Current GWA</span><strong id="premiumGwa" class="stat-value">—</strong><small id="premiumGwaMeta" class="stat-meta">From saved grade records</small></div>
-<div class="premium-stat"><span class="stat-label">Subjects</span><strong id="premiumSubjects" class="stat-value">—</strong><small id="premiumSubjectsMeta" class="stat-meta">Across saved semesters</small></div>
-<div class="premium-stat"><span class="stat-label">Next Class</span><strong id="premiumNextClass" class="stat-value" style="font-size:18px">—</strong><small id="premiumNextClassMeta" class="stat-meta">Checking schedule</small></div>
-<div class="premium-wide"><div class="premium-title"><h3>Attendance health</h3><span id="premiumAttendanceLabel">Live</span></div><div class="metric-bar"><div id="premiumAttendanceBar" class="metric-fill"></div></div><div id="premiumAttendanceBreakdown" class="premium-list" style="margin-top:12px"></div></div>
-<div class="premium-side"><div class="premium-title"><h3>Upcoming classes</h3><span>Schedule</span></div><div id="premiumScheduleList" class="premium-list"><div class="premium-list-row"><small>Loading schedule…</small></div></div></div>
-</section>
-
-<section class="portal-section home-content-section" aria-label="Academic tools">
+  <section class="portal-section home-content-section" aria-label="Academic tools">
     <div class="section-heading"><div><span class="section-kicker">ACADEMIC TOOLS</span><h2>Quick Access</h2></div><span class="section-note">Your classroom modules</span></div>
     <div class="module-grid">
       <a class="module-card" href="../attendance/index.html"><span class="module-icon">✓</span><span><strong>Attendance</strong><small>QR scanner, manual marking and daily records</small></span><span class="module-arrow">→</span></a>
       <a class="module-card" href="../grades/index.html"><span class="module-icon">G</span><span><strong>Grades &amp; GWA</strong><small>Subjects, units, GWA and academic summary</small></span><span class="module-arrow">→</span></a>
       <a class="module-card" href="../schedule/index.html"><span class="module-icon">◷</span><span><strong>Schedule</strong><small>View your class timetable and schedule updates</small></span><span class="module-arrow">→</span></a>
       <a class="module-card" href="../class-directory/index.html"><span class="module-icon">◎</span><span><strong>Class Directory</strong><small>Access your BSIS 1-A classmates</small></span><span class="module-arrow">→</span></a>
-    </div>
-  </section>
-
-  <section class="portal-section home-content-section" aria-label="Classroom map">
-    <div class="section-heading"><div><span class="section-kicker">CLASSROOM NAVIGATION</span><h2>Room Map</h2></div><span id="roomMapCount" class="section-note">Loading rooms</span></div>
-    <div class="room-map-card">
-      <div class="room-map-visual" aria-label="Interactive schematic classroom map">
-        <div class="map-grid"></div><div class="map-corridor"></div>
-        <button class="room-node room-node-main" data-room="SS201" type="button"><span>SS201</span><small>F2F classroom</small></button>
-        <div class="room-node room-node-soft"><span>ONLINE</span><small>Remote classes</small></div>
-        <div class="map-compass">N</div>
-      </div>
-      <div class="room-map-panel">
-        <div><span class="map-live-dot"></span><strong>Schedule-aware map</strong></div>
-        <p>Rooms shown here are generated from published class schedule data. No campus coordinates are invented.</p>
-        <div id="roomList" class="room-list"><span class="room-loading">Reading published rooms…</span></div>
-        <a class="map-open-link" href="../schedule/index.html">Open full schedule <span>↗</span></a>
-      </div>
     </div>
   </section>
 
@@ -110,4 +83,4 @@
 <div id="contentViewer" class="content-viewer hidden" aria-hidden="true"><div class="viewer-backdrop" data-close-viewer></div><article class="viewer-card" role="dialog" aria-modal="true" aria-labelledby="viewerTitle"><button class="viewer-close" data-close-viewer type="button" aria-label="Close">×</button><span id="viewerKicker" class="section-kicker">ANNOUNCEMENT</span><h2 id="viewerTitle">—</h2><time id="viewerDate">—</time><div id="viewerBody" class="viewer-body"></div></article></div>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="../supabase-config.js"></script><script src="../shared/auth.js"></script><script src="../shared/admin-recognition.js"></script><script src="home.js"></script>
 <script src="../shared/pwa.js"></script>
-<script src="../shared/app-enhanced.js"></script></body></html>
+</body></html>

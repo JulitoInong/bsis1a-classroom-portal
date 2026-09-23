@@ -33,7 +33,7 @@ body{font-family:"Plus Jakarta Sans",ui-sans-serif,system-ui,sans-serif;backgrou
 </style>
 <style>
 .history-row{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 2px;border-bottom:1px solid var(--line)}.history-row strong,.history-row span{display:block}.history-row strong{font-size:12px}.history-row span{font-size:10px;color:var(--muted);margin-top:3px}.history-empty{padding:24px 4px;text-align:center;color:var(--muted);font-size:12px}
-</style><link rel="stylesheet" href="../shared/app-enhanced.css"></head><body>
+</style></head><body>
 <div class="unified-module-bar"><a href="../home/index.html">← BSIS 1-A Portal</a><span>Attendance Module</span><nav><a href="../grades/index.html">Grades & GWA</a><a href="../schedule/index.html">Schedule</a></nav></div><main class="app">
 <header class="topbar"><div class="brand"><div class="logo">1A</div><div><div class="eyebrow">BSIS • School Year 2026–2027</div><h1>Attendance</h1></div></div><div class="datebox"><b id="todayLabel">—</b><span id="dayLabel">—</span></div></header>
 <section class="hero"><div class="hero-head"><div><h2>QR Attendance</h2><p>Record today&apos;s attendance securely for the signed-in class.</p></div><div class="live"><i class="dot"></i><span>READY</span></div></div><div class="stats"><div class="stat"><span>TOTAL</span><b id="total">49</b></div><div class="stat"><span>PRESENT</span><b id="present">0</b></div><div class="stat"><span>ABSENT</span><b id="absent">49</b></div><div class="stat"><span>RATE</span><b id="rate">0%</b></div></div></section>
@@ -70,4 +70,4 @@ document.addEventListener("visibilitychange",refreshDate);window.addEventListene
 todayKey=localDateKey();try{attendance=JSON.parse(localStorage.getItem("bsis1a_attendance_"+todayKey)||"{}")}catch(e){attendance={}}refreshDate();render();
 if("serviceWorker" in navigator){window.addEventListener("load",()=>navigator.serviceWorker.register("./sw.js").catch(()=>{}))}
 document.getElementById("manual").addEventListener("keydown",e=>{if(e.key==="Enter")markManual()});
-</script><script src="attendance-supabase.js"></script><script src="../shared/app-enhanced.js"></script></body></html>
+</script><script src="attendance-supabase.js"></script></body></html>
