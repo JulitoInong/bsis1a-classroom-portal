@@ -290,18 +290,18 @@
 
                 tr.innerHTML = `
                     <td class="p-3 pl-6">
-                        <input type="text" value="${escapeHTML(course.code || '')}" oninput="calculateGWA()" 
+                        <input type="text" aria-label="Course code or name" value="${escapeHTML(course.code || '')}" oninput="calculateGWA()" 
                             class="course-name w-full bg-transparent border border-transparent hover:border-slate-300 focus:border-blue-500 rounded-lg px-2.5 py-1.5 text-slate-800 font-semibold focus:bg-white focus:outline-none transition" 
                             placeholder="Course Code / Name">
                     </td>
                     <td class="p-3">
-                        <select onchange="calculateGWA()" 
+                        <select aria-label="Grade" onchange="calculateGWA()" 
                             class="course-grade bg-slate-50 border border-slate-200 text-slate-800 rounded-lg px-2.5 py-1.5 font-bold focus:outline-none focus:ring-2 focus:ring-blue-500 w-full">
                             ${options}
                         </select>
                     </td>
                     <td class="p-3">
-                        <input type="number" min="1" max="6" step="1" value="${course.units || ''}" oninput="calculateGWA()" 
+                        <input type="number" aria-label="Units" min="1" max="6" step="1" value="${course.units || ''}" oninput="calculateGWA()" 
                             class="course-units bg-slate-50 border border-slate-200 text-slate-800 rounded-lg px-2.5 py-1.5 text-center font-bold focus:outline-none focus:ring-2 focus:ring-blue-500 w-full">
                         <p class="course-units-error hidden text-[10px] text-rose-600 font-semibold mt-1">Enter 1 to 6 units.</p>
                     </td>
@@ -309,7 +309,7 @@
                         0.00
                     </td>
                     <td class="p-3 text-center no-print">
-                        <button onclick="removeCourse(this)" class="text-slate-300 hover:text-red-500 p-1.5 rounded-lg transition">
+                        <button onclick="removeCourse(this)" class="text-slate-300 hover:text-red-500 p-1.5 rounded-lg transition" aria-label="Remove course" title="Remove course">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
                             </svg>
