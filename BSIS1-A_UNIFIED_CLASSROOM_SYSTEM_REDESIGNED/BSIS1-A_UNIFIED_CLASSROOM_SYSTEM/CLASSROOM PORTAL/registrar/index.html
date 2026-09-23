@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="theme-color" content="#101827">
+<title>BSIS 1-A | Student Registrar</title><link rel="icon" type="image/png" href="../assets/bsis-1a-logo.png"><link rel="stylesheet" href="../style.css">
+<link rel="stylesheet" href="../shared/portal-polish.css"><link rel="stylesheet" href="../shared/portal-redesign.css">
+<link rel="manifest" href="../manifest.webmanifest"><link rel="apple-touch-icon" href="../assets/bsis-1a-icon-192.png">
+<link rel="stylesheet" href="../shared/app-enhanced.css"></head>
+<body><header class="site-header"><div class="header-inner"><div class="brand"><div class="brand-mark brand-logo"><img src="../assets/bsis-1a-logo.png" alt=""></div><div><h1>BSIS 1-A</h1><p>Student Registrar</p></div></div><div class="registrar-header-actions"><span class="admin-home-badge registrar-admin-badge hidden" data-admin-only>Administrator</span><a id="adminPortalLink" class="top-link admin-top-link hidden" data-admin-only href="../admin/index.html">Admin Portal</a><div class="school-year">SY 2026–2027</div></div></div></header>
+<main class="main student-main"><section class="intro reveal"><div class="intro-label"><span class="brand-line"></span> STUDENT REGISTRAR</div><h2>Complete Your<br><span>Student Registration</span></h2><p>Your Google account is already connected. Complete the required student information to enter the portal.</p></section>
+<section class="student-card card glass reveal reveal-delay">
+<div class="card-top"><div><h3>Student Information</h3><p>All fields below are required.</p></div><div class="step">02</div></div>
+<div id="googleProfile" class="google-profile"><img id="googleAvatar" class="google-avatar" alt=""><div><span class="profile-label">GOOGLE ACCOUNT</span><strong id="googleProfileName">—</strong><span id="googleProfileEmail">—</span></div></div>
+<div class="switch-account-row">
+  <button id="switchGoogleAccountBtn" class="secondary-btn compact" type="button">Use a different Google account</button>
+</div>
+<form id="studentForm" novalidate>
+<div class="field-grid"><div class="field"><div class="label-row"><label for="studentNo">Student No.</label></div><input id="studentNo" maxlength="40" placeholder="e.g. 2026-0001" autocomplete="off" required><p class="field-hint">Enter your official Student No.</p></div>
+<div class="field"><div class="label-row"><label for="birthday">Birthday</label></div><input type="date" id="birthday" autocomplete="bday" required><p class="field-hint">Your date of birth.</p></div></div>
+<div class="field"><div class="label-row"><label for="fullName">Full Name</label><span>Required</span></div><input id="fullName" maxlength="80" autocomplete="name" required><p class="field-hint">You may edit the name before submitting.</p></div>
+<div class="field"><div class="label-row"><label for="gmail">Gmail Address</label><span>Required</span></div><input type="email" id="gmail" maxlength="120" autocomplete="email" readonly required><p class="field-hint">Taken from your authenticated Google account.</p></div>
+<button id="submitBtn" class="submit-btn" type="submit"><span id="buttonText">Complete Registration</span><span class="spinner"></span></button>
+</form><div id="message" class="message" role="alert" aria-live="polite"></div>
+<div class="privacy-note"><div class="note-icon">i</div><p>Your registration information is stored in the BSIS 1-A classroom database for authorized administration.</p></div>
+</section></main>
+<footer class="footer"><span>BSIS 1-A</span><span class="footer-dot">•</span><span>School Year 2026–2027</span></footer>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="../supabase-config.js"></script><script src="../shared/auth.js"></script><script src="../shared/admin-recognition.js"></script><script src="registrar.js"></script><script src="../shared/pwa.js"></script>
+<script src="../shared/app-enhanced.js"></script></body></html>

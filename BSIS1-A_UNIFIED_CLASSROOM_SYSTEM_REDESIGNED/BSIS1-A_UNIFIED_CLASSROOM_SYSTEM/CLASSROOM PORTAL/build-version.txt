@@ -1,0 +1,3 @@
+BSIS 1-A Unified Classroom System
+Version: 2026.09.23-unified
+Modules: Portal, Attendance, Grades & GWA, Schedule, Class Directory, Class Officers, Profile, Admin

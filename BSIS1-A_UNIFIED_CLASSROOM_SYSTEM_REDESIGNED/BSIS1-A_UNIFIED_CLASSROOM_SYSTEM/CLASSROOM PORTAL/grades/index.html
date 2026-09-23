@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Academic Performance & GWA Calculator</title>
+    <link rel="icon" type="image/png" href="../assets/bsis-1a-logo.png">
+    <meta name="theme-color" content="#020617">
+    <meta name="description" content="A school-wide academic performance and GWA calculator.">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="BSIS 1-A Grades">
+    <link rel="manifest" href="manifest.json">
+    <link rel="stylesheet" href="../shared/portal-redesign.css">
+    <!-- Developer: BSIS Student Developer -->
+    <!-- Tech Stack: HTML5, Tailwind CSS, JavaScript (Vanilla) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            color: #172033;
+            background:
+                radial-gradient(circle at 92% 4%, rgba(37, 99, 235, 0.12), transparent 26rem),
+                linear-gradient(180deg, #f8fafc 0%, #eef3f8 100%);
+        }
+        button,
+        input,
+        select {
+            font: inherit;
+        }
+        button:focus-visible,
+        input:focus-visible,
+        select:focus-visible {
+            outline: 3px solid rgba(37, 99, 235, 0.25);
+            outline-offset: 2px;
+        }
+        @media print {
+            .no-print {
+                display: none !important;
+            }
+            .print-card {
+                border: none !important;
+                box-shadow: none !important;
+            }
+        }
+        .module-bar { position: sticky; top: 0; z-index: 20; background: rgba(2, 6, 23, .96); backdrop-filter: blur(12px); }
+        .module-bar a { color: #cbd5e1; text-decoration: none; }
+        .module-bar a:hover, .module-bar a:focus-visible { color: #fff; }
+        .module-bar-inner { max-width: 1024px; margin: auto; min-height: 48px; display: flex; align-items: center; gap: 14px; padding: 8px 16px; font-size: 12px; font-weight: 700; }
+        .module-bar-title { color: #fff; }
+        .module-bar-nav { margin-left: auto; display: flex; gap: 14px; overflow-x: auto; white-space: nowrap; }
+        @media (max-width: 520px) { .module-bar-inner { align-items: flex-start; flex-wrap: wrap; } .module-bar-nav { width: 100%; margin-left: 0; } }
+    </style>
+<link rel="stylesheet" href="../shared/app-enhanced.css"></head>
+<body class="min-h-screen pb-12">
+
+    <div class="module-bar no-print">
+        <div class="module-bar-inner">
+            <a href="../home/index.html">← BSIS 1-A Portal</a>
+            <span class="module-bar-title">Grades &amp; GWA</span>
+            <nav class="module-bar-nav" aria-label="Module navigation">
+                <a href="../attendance/index.html">Attendance</a>
+                <a href="../schedule/index.html">Schedule</a>
+            </nav>
+        </div>
+    </div>
+
+    <!-- Top Navigation Bar -->
+    <nav class="bg-slate-950 text-white border-b border-slate-800 no-print mb-8">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <img src="../assets/bsis-1a-logo.png" alt="BSIS 1-A logo" class="h-12 w-12 shrink-0 rounded-full object-contain bg-white shadow-lg shadow-blue-950/30">
+                <div>
+                    <span class="font-bold text-sm tracking-wide text-white block">BSIS 1-A</span>
+                    <span class="text-[10px] text-slate-400 block mt-0.5">Academic Performance Workspace</span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
+        
+        <!-- Header Section -->
+        <div class="bg-white/90 backdrop-blur rounded-2xl p-6 sm:p-8 border border-slate-200 shadow-[0_12px_35px_rgba(15,23,42,0.06)] print-card flex flex-col md:flex-row justify-between items-start md:items-center gap-5">
+            <div>
+                <div class="inline-flex items-center gap-2 px-3 py-1 bg-blue-50 text-blue-700 text-xs font-semibold rounded-full mb-3 border border-blue-100">
+                    <span class="w-2 h-2 rounded-full bg-blue-600 animate-pulse"></span>
+                    Semester Overview
+                </div>
+                <h1 class="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">Grade & GWA Evaluator</h1>
+                <p class="text-sm text-slate-500 mt-2 max-w-xl">Manage your subjects and view your weighted average across semesters.</p>
+            </div>
+            <div class="flex flex-wrap gap-2 no-print">
+                <button onclick="exportCSV()" class="bg-blue-600 hover:bg-blue-700 text-white text-xs font-semibold px-4 py-2.5 rounded-xl transition flex items-center gap-2 shadow-sm">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v12m0 0l4-4m-4 4l-4-4M5 21h14a2 2 0 002-2v-3M3 16v3a2 2 0 002 2" />
+                    </svg>
+                    Export CSV
+                </button>
+                <button onclick="window.print()" class="bg-slate-900 hover:bg-slate-800 text-white text-xs font-semibold px-4 py-2.5 rounded-xl transition flex items-center gap-2 shadow-sm">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z" />
+                    </svg>
+                    Print Report
+                </button>
+                <button onclick="clearAll()" class="bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-semibold px-3 py-2.5 rounded-xl transition border border-slate-200">
+                    Clear Semester
+                </button>
+            </div>
+        </div>
+
+        <!-- Semester Controls -->
+        <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-4 flex flex-col sm:flex-row gap-3 sm:items-end print-card">
+            <label class="flex-1 text-xs font-bold text-slate-500 uppercase tracking-wider">
+                Semester
+                <select id="semesterSelect" onchange="switchSemester(this.value)" class="mt-2 bg-slate-50 border border-slate-200 text-slate-800 rounded-xl px-3 py-2.5 font-semibold focus:outline-none focus:ring-2 focus:ring-blue-500 w-full">
+                    <option value="1st Semester">1st Semester</option>
+                    <option value="2nd Semester">2nd Semester</option>
+                    <option value="Summer">Summer</option>
+                </select>
+            </label>
+            <label class="flex-1 text-xs font-bold text-slate-500 uppercase tracking-wider">
+                Target GWA
+                <input id="targetGwa" type="number" min="1" max="5" step="0.01" placeholder="e.g. 1.75" oninput="saveTargetAndCalculate()" class="mt-2 bg-slate-50 border border-slate-200 text-slate-800 rounded-xl px-3 py-2.5 font-semibold focus:outline-none focus:ring-2 focus:ring-blue-500 w-full">
+            </label>
+        </div>
+
+        <div class="bg-slate-900 text-white rounded-2xl px-5 py-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 print-card">
+            <div>
+                <p class="text-xs font-bold text-slate-400 uppercase tracking-wider">Overall Academic Summary</p>
+                <p class="text-sm text-slate-300 mt-1">Weighted across all saved semesters.</p>
+            </div>
+            <div class="flex gap-6">
+                <div>
+                    <p class="text-[10px] text-slate-400 uppercase tracking-wider">Overall Units</p>
+                    <p id="overallUnits" class="text-xl font-extrabold mt-1">0</p>
+                </div>
+                <div>
+                    <p class="text-[10px] text-slate-400 uppercase tracking-wider">Overall GWA</p>
+                    <p id="overallGwa" class="text-xl font-extrabold mt-1">0.00</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Metrics Dashboard -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            <!-- Total Units -->
+            <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm print-card">
+                <p class="text-xs font-bold text-slate-400 uppercase tracking-wider">Total Academic Units</p>
+                <p class="text-3xl font-extrabold text-slate-800 mt-2" id="displayUnits">0</p>
+                <p class="text-[11px] text-slate-400 mt-1">Sum of registered units</p>
+            </div>
+
+            <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm print-card">
+                <p class="text-xs font-bold text-slate-400 uppercase tracking-wider">Subjects</p>
+                <p class="text-3xl font-extrabold text-slate-800 mt-2" id="displaySubjects">0</p>
+                <p class="text-[11px] text-slate-400 mt-1">Courses in this semester</p>
+            </div>
+
+            <!-- Total Quality Points -->
+            <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm print-card">
+                <p class="text-xs font-bold text-slate-400 uppercase tracking-wider">Quality Points</p>
+                <p class="text-3xl font-extrabold text-slate-800 mt-2" id="displayPoints">0.00</p>
+                <p class="text-[11px] text-slate-400 mt-1">Sum of (Grade × Units)</p>
+            </div>
+
+            <!-- GWA Result -->
+            <div class="bg-blue-600 text-white p-6 rounded-2xl shadow-lg shadow-blue-900/15 relative overflow-hidden flex flex-col justify-between">
+                <div>
+                    <p class="text-xs font-bold text-blue-200 uppercase tracking-wider">Computed GWA</p>
+                    <p class="text-4xl font-extrabold mt-1 tracking-tight" id="displayGWA">0.00</p>
+                </div>
+                <div class="mt-3">
+                    <span id="academicStanding" class="inline-block bg-white/20 text-white text-xs font-bold px-3 py-1 rounded-lg backdrop-blur-md">
+                        Initializing...
+                    </span>
+                    <p id="targetFeedback" class="text-[11px] text-blue-100 mt-2">Set a target GWA to track your goal.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-5 print-card">
+            <div class="flex items-center justify-between gap-3">
+                <div>
+                    <h2 class="font-bold text-slate-800 text-base">Grade Distribution</h2>
+                    <p class="text-xs text-slate-400 mt-1">Subjects grouped by grade for this semester.</p>
+                </div>
+                <span id="distributionTotal" class="text-xs font-semibold text-slate-400">0 subjects</span>
+            </div>
+            <div id="gradeDistribution" class="grid grid-cols-5 sm:grid-cols-10 gap-2 mt-5"></div>
+        </div>
+
+        <!-- Subject List Table -->
+        <div class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden print-card">
+            <div class="p-5 border-b border-slate-100 flex flex-col sm:flex-row sm:justify-between sm:items-center gap-3 no-print">
+                <div>
+                    <h2 class="font-bold text-slate-800 text-base">Course Enrollment</h2>
+                    <p class="text-xs text-slate-400 mt-1">Grades and units recalculate instantly.</p>
+                </div>
+                    <button onclick="addNewRow()" class="bg-blue-600 hover:bg-blue-700 text-white text-xs font-semibold px-4 py-2.5 rounded-xl transition flex items-center gap-1.5 shadow-sm self-start sm:self-auto">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+                    </svg>
+                    Add Subject
+                </button>
+            </div>
+            <div id="undoNotice" class="hidden px-5 py-3 bg-amber-50 border-b border-amber-100 text-xs text-amber-800 flex items-center justify-between gap-3 no-print">
+                <span>Subject removed.</span>
+                <button onclick="undoRemove()" class="font-bold underline hover:no-underline">Undo</button>
+            </div>
+
+            <div class="overflow-x-auto">
+                <table class="w-full min-w-[680px] text-left">
+                    <thead>
+                        <tr class="bg-slate-50/80 text-slate-400 text-[11px] font-bold uppercase tracking-wider border-b border-slate-100">
+                            <th class="p-4 pl-6">Course Description</th>
+                            <th class="p-4 w-32">Grade</th>
+                            <th class="p-4 w-28">Units</th>
+                            <th class="p-4 w-36 text-right">Quality Points</th>
+                            <th class="p-4 w-16 text-center no-print">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="courseTableBody" class="divide-y divide-slate-100 text-sm font-medium">
+                        <!-- Dynamic Course Rows -->
+                    </tbody>
+                </table>
+                <div id="emptyMessage" class="hidden px-6 py-14 text-center">
+                    <div class="mx-auto mb-3 h-11 w-11 rounded-2xl bg-blue-50 text-blue-600 flex items-center justify-center text-xl font-bold">+</div>
+                    <p class="text-sm font-semibold text-slate-700">Your subject list is empty.</p>
+                    <p class="text-xs text-slate-400 mt-1">Add your first subject to start calculating your GWA.</p>
+                </div>
+            </div>
+        </div>
+
+        <footer class="text-center text-xs text-slate-400 pt-4 no-print">
+            <p>BSIS 1-A &bull; Student Academic Performance &bull; Published <span id="currentYear">2026</span></p>
+        </footer>
+
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="../supabase-config.js"></script>
+    <script src="../shared/auth.js"></script>
+    <script src="grades-auth.js"></script>
+    <script>
+        // Set dynamic year in footer
+        document.getElementById('currentYear').innerText = new Date().getFullYear();
+
+        const GRADES_LIST = ["1.00", "1.25", "1.50", "1.75", "2.00", "2.25", "2.50", "2.75", "3.00", "5.00"];
+        const SEMESTERS = ["1st Semester", "2nd Semester", "Summer"];
+        let currentSemester = SEMESTERS[0];
+        let semesterData = {};
+        let lastDeleted = null;
+
+        window.addEventListener('DOMContentLoaded', () => {
+            const savedSemesters = localStorage.getItem('acadtrack_semesters');
+            const legacyCourses = localStorage.getItem('acadtrack_courses');
+
+            try {
+                semesterData = savedSemesters ? JSON.parse(savedSemesters) : {};
+            } catch (error) {
+                semesterData = {};
+            }
+
+            if (!savedSemesters && legacyCourses) {
+                try {
+                    semesterData[currentSemester] = JSON.parse(legacyCourses);
+                } catch (error) {
+                    semesterData[currentSemester] = [];
+                }
+            }
+
+            document.getElementById('targetGwa').value = localStorage.getItem('acadtrack_target') || '';
+            document.getElementById('semesterSelect').value = currentSemester;
+            renderCourses(semesterData[currentSemester] || []);
+        });
+
+        function renderCourses(courses) {
+            const tbody = document.getElementById('courseTableBody');
+            tbody.innerHTML = '';
+
+            courses.forEach((course) => {
+                const tr = document.createElement('tr');
+                tr.className = "hover:bg-slate-50/50 transition";
+
+                const options = GRADES_LIST.map(g => 
+                    `<option value="${g}" ${parseFloat(g) === parseFloat(course.grade) ? 'selected' : ''}>${g}</option>`
+                ).join('');
+
+                tr.innerHTML = `
+                    <td class="p-3 pl-6">
+                        <input type="text" value="${escapeHTML(course.code || '')}" oninput="calculateGWA()" 
+                            class="course-name w-full bg-transparent border border-transparent hover:border-slate-300 focus:border-blue-500 rounded-lg px-2.5 py-1.5 text-slate-800 font-semibold focus:bg-white focus:outline-none transition" 
+                            placeholder="Course Code / Name">
+                    </td>
+                    <td class="p-3">
+                        <select onchange="calculateGWA()" 
+                            class="course-grade bg-slate-50 border border-slate-200 text-slate-800 rounded-lg px-2.5 py-1.5 font-bold focus:outline-none focus:ring-2 focus:ring-blue-500 w-full">
+                            ${options}
+                        </select>
+                    </td>
+                    <td class="p-3">
+                        <input type="number" min="1" max="6" step="1" value="${course.units || ''}" oninput="calculateGWA()" 
+                            class="course-units bg-slate-50 border border-slate-200 text-slate-800 rounded-lg px-2.5 py-1.5 text-center font-bold focus:outline-none focus:ring-2 focus:ring-blue-500 w-full">
+                        <p class="course-units-error hidden text-[10px] text-rose-600 font-semibold mt-1">Enter 1 to 6 units.</p>
+                    </td>
+                    <td class="p-3 text-right font-bold text-slate-700 course-points">
+                        0.00
+                    </td>
+                    <td class="p-3 text-center no-print">
+                        <button onclick="removeCourse(this)" class="text-slate-300 hover:text-red-500 p-1.5 rounded-lg transition">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                            </svg>
+                        </button>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+
+            calculateGWA();
+            checkEmptyState();
+        }
+
+        function calculateGWA() {
+            const rows = document.querySelectorAll('#courseTableBody tr');
+            let totalUnits = 0;
+            let totalPoints = 0;
+            const currentCourses = [];
+
+            rows.forEach(row => {
+                const code = row.querySelector('.course-name').value;
+                const grade = parseFloat(row.querySelector('.course-grade').value) || 0;
+                const unitsInput = row.querySelector('.course-units');
+                const rawUnits = unitsInput.value.trim();
+                const parsedUnits = Number(rawUnits);
+                const validUnits = rawUnits !== '' && Number.isFinite(parsedUnits) && parsedUnits >= 1 && parsedUnits <= 6;
+                const units = validUnits ? parsedUnits : 0;
+
+                unitsInput.classList.toggle('border-rose-400', !validUnits);
+                unitsInput.classList.toggle('bg-rose-50', !validUnits);
+                unitsInput.setAttribute('aria-invalid', String(!validUnits));
+                row.querySelector('.course-units-error').classList.toggle('hidden', validUnits);
+
+                const points = grade * units;
+                row.querySelector('.course-points').innerText = points.toFixed(2);
+
+                totalUnits += units;
+                totalPoints += points;
+
+                currentCourses.push({ code, grade: grade.toFixed(2), units: validUnits ? units : rawUnits });
+            });
+
+            const gwa = totalUnits > 0 ? (totalPoints / totalUnits) : 0;
+
+            document.getElementById('displayUnits').innerText = totalUnits;
+            document.getElementById('displayPoints').innerText = totalPoints.toFixed(2);
+            document.getElementById('displayGWA').innerText = gwa.toFixed(2);
+            document.getElementById('displaySubjects').innerText = rows.length;
+
+            updateAcademicBadge(gwa, totalUnits);
+            updateOverallSummary();
+            updateGradeDistribution();
+
+            semesterData[currentSemester] = currentCourses;
+            localStorage.setItem('acadtrack_semesters', JSON.stringify(semesterData));
+        }
+
+        function updateAcademicBadge(gwa, totalUnits) {
+            const badge = document.getElementById('academicStanding');
+            if (totalUnits === 0) {
+                badge.innerText = "Please add subjects.";
+                badge.className = "inline-block bg-white/20 text-white text-xs font-bold px-3 py-1 rounded-lg";
+                updateTargetFeedback(gwa, totalUnits);
+                return;
+            }
+
+            if (gwa >= 1.00 && gwa <= 1.25) {
+                badge.innerText = "🏆 President's Honors";
+                badge.className = "inline-block bg-amber-400 text-amber-950 font-bold text-xs px-3 py-1 rounded-lg shadow-sm";
+            } else if (gwa > 1.25 && gwa <= 1.75) {
+                badge.innerText = "🌟 Dean's Honors";
+                badge.className = "inline-block bg-emerald-400 text-emerald-950 font-bold text-xs px-3 py-1 rounded-lg shadow-sm";
+            } else if (gwa > 1.75 && gwa <= 3.00) {
+                badge.innerText = "✅ Satisfactory Standing";
+                badge.className = "inline-block bg-blue-200 text-blue-900 font-bold text-xs px-3 py-1 rounded-lg";
+            } else {
+                badge.innerText = "⚠️ Conditional Standing";
+                badge.className = "inline-block bg-rose-400 text-white font-bold text-xs px-3 py-1 rounded-lg shadow-sm";
+            }
+
+            updateTargetFeedback(gwa, totalUnits);
+        }
+
+        function updateTargetFeedback(gwa, totalUnits) {
+            const feedback = document.getElementById('targetFeedback');
+            const target = parseFloat(document.getElementById('targetGwa').value);
+
+            if (!Number.isFinite(target) || target < 1 || target > 5) {
+                feedback.innerText = "Set a target GWA to track your goal.";
+                return;
+            }
+
+            if (totalUnits === 0) {
+                feedback.innerText = `Target: ${target.toFixed(2)}. Add subjects to compare.`;
+            } else if (gwa <= target) {
+                feedback.innerText = `On track for your ${target.toFixed(2)} target.`;
+            } else {
+                feedback.innerText = `${(gwa - target).toFixed(2)} above your ${target.toFixed(2)} target.`;
+            }
+        }
+
+        function updateOverallSummary() {
+            let overallUnits = 0;
+            let overallPoints = 0;
+
+            SEMESTERS.forEach(semester => {
+                (semesterData[semester] || []).forEach(course => {
+                    const units = Number(course.units);
+                    const grade = Number(course.grade);
+                    if (Number.isFinite(units) && units >= 1 && units <= 6 && Number.isFinite(grade)) {
+                        overallUnits += units;
+                        overallPoints += grade * units;
+                    }
+                });
+            });
+
+            document.getElementById('overallUnits').innerText = overallUnits;
+            document.getElementById('overallGwa').innerText = overallUnits > 0 ? (overallPoints / overallUnits).toFixed(2) : '0.00';
+        }
+
+        function updateGradeDistribution() {
+            const counts = GRADES_LIST.reduce((result, grade) => {
+                result[grade] = 0;
+                return result;
+            }, {});
+            const rows = document.querySelectorAll('#courseTableBody tr');
+
+            rows.forEach(row => {
+                const grade = row.querySelector('.course-grade').value;
+                if (counts[grade] !== undefined) {
+                    counts[grade] += 1;
+                }
+            });
+
+            const maxCount = Math.max(...Object.values(counts), 1);
+            document.getElementById('distributionTotal').innerText = `${rows.length} subject${rows.length === 1 ? '' : 's'}`;
+            document.getElementById('gradeDistribution').innerHTML = GRADES_LIST.map(grade => {
+                const count = counts[grade];
+                const height = count > 0 ? Math.max((count / maxCount) * 100, 12) : 4;
+                return `
+                    <div class="min-w-0 text-center">
+                        <div class="h-24 flex items-end justify-center">
+                            <div class="w-full max-w-7 rounded-t-md bg-blue-500" style="height: ${height}%" title="${count} subject${count === 1 ? '' : 's'}"></div>
+                        </div>
+                        <p class="text-[10px] font-bold text-slate-500 mt-2">${grade}</p>
+                        <p class="text-[10px] text-slate-400">${count}</p>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function saveTargetAndCalculate() {
+            localStorage.setItem('acadtrack_target', document.getElementById('targetGwa').value);
+            calculateGWA();
+        }
+
+        function switchSemester(semester) {
+            currentSemester = SEMESTERS.includes(semester) ? semester : SEMESTERS[0];
+            renderCourses(semesterData[currentSemester] || []);
+        }
+
+        function addNewRow() {
+            const rows = document.querySelectorAll('#courseTableBody tr');
+            const data = [];
+            rows.forEach(r => {
+                data.push({
+                    code: r.querySelector('.course-name').value,
+                    grade: r.querySelector('.course-grade').value,
+                    units: parseFloat(r.querySelector('.course-units').value) || 0
+                });
+            });
+            data.push({ code: "", grade: "1.00", units: 3 });
+            renderCourses(data);
+        }
+
+        function removeCourse(btn) {
+            if (!confirm("Remove this subject from the current semester?")) {
+                return;
+            }
+
+            const row = btn.closest('tr');
+            const rows = Array.from(document.querySelectorAll('#courseTableBody tr'));
+            const rowIndex = rows.indexOf(row);
+            lastDeleted = {
+                semester: currentSemester,
+                index: rowIndex,
+                course: {
+                    code: row.querySelector('.course-name').value,
+                    grade: row.querySelector('.course-grade').value,
+                    units: row.querySelector('.course-units').value
+                }
+            };
+
+            row.remove();
+            calculateGWA();
+            checkEmptyState();
+            document.getElementById('undoNotice').classList.remove('hidden');
+        }
+
+        function undoRemove() {
+            if (!lastDeleted || lastDeleted.semester !== currentSemester) {
+                return;
+            }
+
+            const courses = semesterData[currentSemester] || [];
+            courses.splice(lastDeleted.index, 0, lastDeleted.course);
+            lastDeleted = null;
+            renderCourses(courses);
+            document.getElementById('undoNotice').classList.add('hidden');
+        }
+
+        function clearAll() {
+            if (!confirm(`Clear all subjects from ${currentSemester}?`)) {
+                return;
+            }
+
+            semesterData[currentSemester] = [];
+            localStorage.setItem('acadtrack_semesters', JSON.stringify(semesterData));
+            document.getElementById('courseTableBody').innerHTML = '';
+            lastDeleted = null;
+            calculateGWA();
+            checkEmptyState();
+            document.getElementById('undoNotice').classList.add('hidden');
+        }
+
+        function exportCSV() {
+            const rows = document.querySelectorAll('#courseTableBody tr');
+            if (rows.length === 0) {
+                alert('Add at least one subject before exporting.');
+                return;
+            }
+
+            const csvRows = [['Semester', 'Subject', 'Grade', 'Units', 'Quality Points']];
+            rows.forEach(row => {
+                const subject = row.querySelector('.course-name').value;
+                const grade = row.querySelector('.course-grade').value;
+                const units = row.querySelector('.course-units').value;
+                const points = row.querySelector('.course-points').innerText;
+                csvRows.push([currentSemester, subject, grade, units, points]);
+            });
+
+            csvRows.push([]);
+            csvRows.push(['Summary']);
+            csvRows.push(['Total Units', document.getElementById('displayUnits').innerText]);
+            csvRows.push(['Quality Points', document.getElementById('displayPoints').innerText]);
+            csvRows.push(['GWA', document.getElementById('displayGWA').innerText]);
+            csvRows.push(['Target GWA', document.getElementById('targetGwa').value || 'Not set']);
+
+            const csv = csvRows.map(row => row.map(value => `"${String(value).replace(/"/g, '""')}"`).join(',')).join('\n');
+            const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(blob);
+            link.download = `gwa-${currentSemester.toLowerCase().replace(/\s+/g, '-')}.csv`;
+            link.click();
+            URL.revokeObjectURL(link.href);
+        }
+
+        function escapeHTML(value) {
+            return String(value)
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;')
+                .replace(/'/g, '&#039;');
+        }
+
+        function checkEmptyState() {
+            const hasRows = document.querySelector('#courseTableBody tr');
+            document.getElementById('emptyMessage').classList.toggle('hidden', Boolean(hasRows));
+        }
+
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('sw.js').catch(error => {
+                    console.warn('Service worker registration failed:', error);
+                });
+            });
+        }
+    </script>
+<script src="../shared/app-enhanced.js"></script></body>
+</html>

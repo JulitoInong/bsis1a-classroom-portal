@@ -1,0 +1,22 @@
+BSIS 1-A — STUDENT DELETE UI FIX
+
+Verified issue:
+The Admin Portal Student Records rows showed only "View / Edit", even though
+the underlying delete handler and delete migration already existed.
+
+Fix applied:
+- Added a per-student "Delete" button to each Student Records row.
+- The button is bound to that exact student's record object.
+- Clicking it opens that student's edit/delete modal.
+- The existing confirmation dialog runs before the database delete.
+- The existing delete operation uses the student's UUID (`students.id`).
+- The existing post-delete refresh remains unchanged.
+- The existing avatar cleanup remains unchanged.
+- No authentication account is deleted by the frontend.
+
+Supabase:
+- `admin-student-delete-migration.sql` remains included.
+- It must be executed in the production Supabase project if it has not already
+  been executed there.
+
+No other application architecture was replaced by this fix.
