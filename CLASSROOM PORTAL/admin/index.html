@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#0b1220">
+<title>BSIS 1-A | Admin Login</title>
+<link rel="icon" type="image/png" href="../assets/bsis-1a-logo.png">
+<link rel="stylesheet" href="../style.css">
+<link rel="stylesheet" href="admin-login.css">
+<link rel="stylesheet" href="../shared/portal-redesign.css">
+</head>
+<body class="admin-login-page">
+<main class="admin-login-shell">
+  <section class="admin-login-card">
+    <div class="admin-login-brand">
+      <span class="admin-login-logo"><img src="../assets/bsis-1a-logo.png" alt="BSIS 1-A logo"></span>
+      <div>
+        <strong>BSIS 1-A</strong>
+        <small>Administration</small>
+      </div>
+    </div>
+
+    <div class="admin-login-copy">
+      <span class="login-kicker">SECURE ACCESS</span>
+      <h1>Admin Login</h1>
+      <p>Sign in with an authorized Google account to access student records.</p>
+    </div>
+
+    <button id="adminGoogleBtn" class="admin-google-btn" type="button">
+      <span class="google-mark">G</span>
+      <span>Continue with Google</span>
+    </button>
+
+    <div id="adminLoginMessage" class="admin-login-message" role="alert" aria-live="polite"></div>
+
+    <a class="back-link" href="../login/index.html">← Back to Student Portal</a>
+  </section>
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="../supabase-config.js"></script>
+<script src="../shared/auth.js"></script>
+<script src="admin-login.js"></script>
+</body>
+</html>

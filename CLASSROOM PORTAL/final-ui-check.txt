@@ -1,0 +1,21 @@
+FINAL UI CHECK / CHANGES
+
+Student Home:
+- Removed Quick Access / Student Services section.
+- Removed duplicate View Profile button from the profile summary.
+- Replaced top pill navigation with a hamburger navigation drawer.
+- Added Admin Portal to the drawer only for authorized admins.
+- Drawer closes on navigation, backdrop click, or Escape.
+- Preserved Announcements, Class Information, Class Officers, and My Profile.
+
+Admin Dashboard:
+- Kept sidebar navigation and refined spacing/section proportions.
+- Added consistent admin identity in sidebar/header.
+- Preserved Student Records, Class Officers, Announcements, and Class Information.
+
+Admin recognition:
+- Uses public.admin_users.auth_user_id via shared/admin-recognition.js.
+- Student Home, Student Profile, and Student Registrar use the same recognition source.
+- Admin Dashboard remains protected by admin-guard.js and database RLS.
+
+No database schema changes were made in this UI-only pass.

@@ -1,0 +1,33 @@
+BSIS 1-A STUDENT PORTAL — FINAL PRE-DEPLOY AUDIT
+
+Build type: Static HTML/CSS/JavaScript + Supabase + Google OAuth + PWA
+
+Verified in this package:
+- Student-record delete UI is available per student row and in the student edit modal.
+- Delete action opens the selected student's record and targets that record's UUID only.
+- Confirmation is required before deletion.
+- Successful deletion refreshes the student list automatically.
+- Linked class_officers rows are expected to cascade because class_officers.student_id references students(id) ON DELETE CASCADE in the supplied migration.
+- Google/Auth account is intentionally NOT deleted by the frontend.
+- Stored student-avatar cleanup is attempted after record deletion when the URL belongs to the student-avatars bucket.
+- Admin avatar-delete RLS policy is included in admin-student-delete-migration.sql.
+- Existing admin student UPDATE/DELETE policy is retained.
+- Fixed a verified admin Schedule modal bug: saveSchedule referenced undefined closeModal(); it now uses closeModals().
+- Admin sign-out now redirects directly to the Google Login Portal after a successful sign-out instead of briefly routing through the protected Home page.
+- Duplicate HTML IDs: 0.
+- Missing local HTML/CSS/JS/image references: 0.
+- JavaScript syntax errors: 0.
+- PWA manifest/service worker/icon references: verified.
+- Static production package/archive integrity: verified.
+
+Not verifiable from this local environment:
+- Live Supabase RLS behavior against the production database.
+- Live Google OAuth redirect configuration.
+- Live student deletion against the hosted Supabase project.
+- Browser-specific PWA install UI on every device/browser.
+- Netlify DNS/HTTPS behavior before deployment.
+
+Required Supabase step before using student deletion in production:
+Run admin-student-delete-migration.sql once in Supabase SQL Editor.
+
+Do not place Supabase service_role keys or Google OAuth client secrets in this frontend.

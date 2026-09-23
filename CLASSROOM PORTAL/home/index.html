@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#101827"><meta name="description" content="BSIS 1-A Student Portal">
+<title>BSIS 1-A | Student Portal</title>
+<link rel="icon" type="image/png" href="../assets/bsis-1a-logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../style.css"><link rel="stylesheet" href="home.css"><link rel="stylesheet" href="../shared/portal-redesign.css">
+<link rel="manifest" href="../manifest.webmanifest"><link rel="apple-touch-icon" href="../assets/bsis-1a-icon-192.png">
+</head>
+<body class="home-page">
+<header class="portal-header">
+  <div class="portal-header-inner">
+    <a class="portal-brand" href="index.html" aria-label="BSIS 1-A Home">
+      <span class="portal-brand-logo"><img src="../assets/bsis-1a-logo.png" alt="BSIS 1-A logo"></span>
+      <span><strong>BSIS 1-A</strong><small>Student Portal</small></span>
+    </a>
+    <div class="portal-header-actions">
+      <nav class="desktop-portal-nav" aria-label="Primary navigation">
+        <a href="../attendance/index.html">Attendance</a>
+        <a href="../grades/index.html">Grades</a>
+        <a href="../schedule/index.html">Schedule</a>
+      </nav>
+      <div id="adminHomeIdentity" class="admin-home-identity hidden" data-admin-only><span class="admin-home-dot"></span><span>Administrator</span></div>
+      <span class="school-year-pill">A.Y. 2026–2027</span>
+      <button id="signOutBtn" class="portal-signout" type="button">Sign out</button>
+      <button id="studentMenuBtn" class="student-menu-btn" type="button" aria-label="Open student navigation" aria-expanded="false" aria-controls="studentNav"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+<div id="studentNavBackdrop" class="student-nav-backdrop" aria-hidden="true"></div>
+<aside id="studentNav" class="student-nav" aria-label="Student portal navigation" aria-hidden="true">
+  <div class="student-nav-top"><div class="student-nav-kicker">BSIS 1-A</div><strong>Student Portal</strong><small>Choose where you want to go</small></div>
+  <nav>
+    <a href="index.html"><span>01</span><b>Home</b></a>
+    <a href="../schedule/index.html"><span>02</span><b>Schedule</b></a>
+    <a href="../attendance/index.html"><span>03</span><b>Attendance</b></a>
+    <a href="../grades/index.html"><span>04</span><b>Grades &amp; GWA</b></a>
+    <a href="../class-directory/index.html"><span>05</span><b>Class Directory</b></a>
+    <a href="../class-officers/index.html"><span>06</span><b>Class Officers</b></a>
+    <a href="../profile/index.html"><span>07</span><b>My Profile</b></a>
+    <a id="studentAdminNavLink" class="student-admin-nav-link hidden" data-admin-only href="../admin/index.html"><span>08</span><b>Admin Portal</b></a>
+  </nav>
+  <button class="pwa-install-btn" data-install-app hidden aria-hidden="true" type="button">Install App</button><div class="student-nav-footer"><span class="student-nav-status-dot"></span><span>Signed in</span></div>
+</aside>
+
+<main class="home-main">
+  <section class="home-hero">
+    <div class="hero-copy"><div class="home-eyebrow"><span></span> STUDENT PORTAL</div><h1>Welcome, <span id="welcomeName">Student</span>.</h1><p>Stay updated with the latest BSIS 1-A announcements and class information.</p></div>
+    <div class="hero-status"><span class="status-dot"></span><div><strong>Portal Active</strong><small>A.Y. 2026–2027</small></div></div>
+  </section>
+
+  <section class="student-overview">
+    <div class="overview-photo"><img id="avatar" alt="Profile photo"></div>
+    <div class="overview-info"><span class="section-kicker">MY PROFILE</span><span id="adminHomeProfileBadge" class="admin-profile-badge hidden" data-admin-only>Administrator</span><h2 id="studentName">—</h2><p id="studentNo">Student No. —</p><p id="studentEmail">—</p></div>
+    
+  </section>
+
+  <section class="portal-section home-content-section" aria-label="Academic tools">
+    <div class="section-heading"><div><span class="section-kicker">ACADEMIC TOOLS</span><h2>Quick Access</h2></div><span class="section-note">Your classroom modules</span></div>
+    <div class="module-grid">
+      <a class="module-card" href="../attendance/index.html"><span class="module-icon">✓</span><span><strong>Attendance</strong><small>QR scanner, manual marking and daily records</small></span><span class="module-arrow">→</span></a>
+      <a class="module-card" href="../grades/index.html"><span class="module-icon">G</span><span><strong>Grades &amp; GWA</strong><small>Subjects, units, GWA and academic summary</small></span><span class="module-arrow">→</span></a>
+      <a class="module-card" href="../schedule/index.html"><span class="module-icon">◷</span><span><strong>Schedule</strong><small>View your class timetable and schedule updates</small></span><span class="module-arrow">→</span></a>
+      <a class="module-card" href="../class-directory/index.html"><span class="module-icon">◎</span><span><strong>Class Directory</strong><small>Access your BSIS 1-A classmates</small></span><span class="module-arrow">→</span></a>
+    </div>
+  </section>
+
+  <section id="announcements" class="portal-section home-content-section">
+    <div class="section-heading"><div><span class="section-kicker">CLASS COMMUNICATION</span><h2>Announcements</h2></div><span id="announcementCount" class="section-note">0 published</span></div>
+    <div id="announcementFeed" class="content-feed"><div class="content-loading">Loading announcements…</div></div>
+    <div class="content-pagination" aria-label="Announcement navigation"><button id="announcementPrev" class="pager-btn" type="button">← Older</button><span id="announcementPage">1 / 1</span><button id="announcementNext" class="pager-btn" type="button">Newer →</button></div>
+  </section>
+
+  <section id="class-information" class="portal-section home-content-section">
+    <div class="section-heading"><div><span class="section-kicker">CLASS RESOURCES</span><h2>Class Information</h2></div><span id="classInfoCount" class="section-note">0 published</span></div>
+    <div id="classInfoFeed" class="content-feed"><div class="content-loading">Loading class information…</div></div>
+    <div class="content-pagination" aria-label="Class information navigation"><button id="classInfoPrev" class="pager-btn" type="button">← Older</button><span id="classInfoPage">1 / 1</span><button id="classInfoNext" class="pager-btn" type="button">Newer →</button></div>
+  </section>
+</main>
+
+<div id="contentViewer" class="content-viewer hidden" aria-hidden="true"><div class="viewer-backdrop" data-close-viewer></div><article class="viewer-card" role="dialog" aria-modal="true" aria-labelledby="viewerTitle"><button class="viewer-close" data-close-viewer type="button" aria-label="Close">×</button><span id="viewerKicker" class="section-kicker">ANNOUNCEMENT</span><h2 id="viewerTitle">—</h2><time id="viewerDate">—</time><div id="viewerBody" class="viewer-body"></div></article></div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="../supabase-config.js"></script><script src="../shared/auth.js"></script><script src="../shared/admin-recognition.js"></script><script src="home.js"></script>
+<script src="../shared/pwa.js"></script>
+</body></html>

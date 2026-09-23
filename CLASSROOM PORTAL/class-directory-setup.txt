@@ -1,0 +1,12 @@
+BSIS 1-A CLASS DIRECTORY
+
+Run class-directory-migration.sql once in Supabase SQL Editor.
+The migration creates a restricted RPC that exposes only:
+- student_no
+- full_name
+- avatar_url
+- created_at
+- class officer position
+
+Birthday, Gmail, auth_user_id, internal IDs, and other private student fields are not returned by the directory RPC.
+The directory is available only to authenticated users and is ordered newest registration first.

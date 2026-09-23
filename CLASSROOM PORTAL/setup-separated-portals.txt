@@ -1,0 +1,56 @@
+BSIS 1-A STUDENT PORTAL — SEPARATED FLOW
+================================================
+
+New flow:
+Google Login
+  -> Student Registrar
+  -> Home Dashboard
+  -> Student Profile
+
+Existing admin:
+admin/admin.html
+
+FILES ADDED
+-----------
+login/index.html
+login/login.js
+login/login.css
+registrar/index.html
+registrar/registrar.js
+home/index.html
+home/home.js
+profile/index.html
+profile/profile.js
+shared/auth.js
+storage-migration.sql
+
+IMPORTANT SUPABASE SETUP
+------------------------
+1. Keep your existing Google provider enabled in Supabase Auth.
+2. In Supabase Authentication > URL Configuration, allow the new local
+   registrar URL as a Redirect URL. The exact URL depends on your local
+   folder name and Live Server port.
+3. The Google Cloud OAuth "Authorized JavaScript origins" should contain
+   the origin only, for example:
+   http://127.0.0.1:5500
+4. The Google Cloud OAuth "Authorized redirect URI" remains the Supabase
+   callback URL shown in Supabase's Google provider settings. Do not use
+   the local HTML page as Google's OAuth callback URI.
+5. Run storage-migration.sql in Supabase SQL Editor to create/configure
+   the student-avatars bucket and its upload policies.
+6. Profile photo uploads are limited in the frontend to 5 MB and images only.
+7. The existing students migration already contains auth_user_id and
+   avatar_url, so no replacement of that schema is required.
+
+TESTING
+-------
+Open the root index.html with Live Server. It redirects to login/index.html.
+
+If a Google-authenticated account already has a student row linked by
+auth_user_id, the registrar automatically sends that user to Home.
+Otherwise the user completes registration first.
+
+SECURITY NOTE
+-------------
+The admin page remains a separate page in this package. It is not converted
+to a production-grade admin authentication system by this change.

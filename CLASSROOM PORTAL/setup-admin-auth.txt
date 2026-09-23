@@ -1,0 +1,18 @@
+BSIS 1-A ADMIN AUTHENTICATION SETUP
+===================================
+
+1. Run admin-auth-migration.sql in Supabase SQL Editor.
+2. Sign in once through admin/index.html with the Google account that should be
+   be the administrator.
+3. In Supabase Authentication > Users, copy that user's UUID.
+4. Insert the UUID into public.admin_users:
+   insert into public.admin_users (auth_user_id)
+   values ('YOUR-UUID-HERE');
+5. Add these local URLs to Supabase Authentication > URL Configuration > Redirect URLs:
+   - http://127.0.0.1:5500/BSIS-1A-Student-Profile-Update/BSIS%20LIST%20OF%20STUDENTS%20-%20Supabase/admin/admin-callback.html
+   - Keep the existing student login redirect URL.
+6. Keep the Google Cloud OAuth authorized redirect URI as the Supabase callback
+   URL, not the local admin callback page.
+
+The admin dashboard is now guarded by membership in public.admin_users.
+Do not put an admin email or secret in frontend JavaScript.
